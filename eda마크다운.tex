@@ -1,0 +1,1958 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={EDA1LDS},
+            pdfauthor={DSL},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{EDA1LDS}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{DSL}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{March 21, 2019}
+
+
+\begin{document}
+\maketitle
+
+\section{탐색적자료분석 1차과제}\label{-1}
+
+\subsection{\texorpdfstring{1번 Ashwan에서 측정한 Nile 강의 유량 자료 (R
+datasets:: Nile) 줄기그림을 그리고 자료에 대하여 설명하여라. depth 등이
+들어간 `완벽한' 줄기그림을 손으로 작성하여라. R이 만들어 준 부분을 오려
+붙이고 나머지 연필로 완성하여도
+된다.}{1번 Ashwan에서 측정한 Nile 강의 유량 자료 (R datasets:: Nile) 줄기그림을 그리고 자료에 대하여 설명하여라. depth 등이 들어간 완벽한 줄기그림을 손으로 작성하여라. R이 만들어 준 부분을 오려 붙이고 나머지 연필로 완성하여도 된다.}}\label{-ashwan--nile----r-datasets-nile-----.-depth------.-r---------.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(Nile)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   456.0   798.5   893.5   919.4  1032.5  1370.0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{stem}\NormalTok{(Nile)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##   The decimal point is 2 digit(s) to the right of the |
+## 
+##    4 | 6
+##    5 | 
+##    6 | 5899
+##    7 | 000123444455667778
+##    8 | 000011222233344555556667779
+##    9 | 0011222244466678899
+##   10 | 0122234455
+##   11 | 00012244566678
+##   12 | 112356
+##   13 | 7
+\end{verbatim}
+
+강 유량의 범위는 400\textasciitilde{}1300으로 퍼져 있으며, 유량 800대로
+센터링 되어있으며, 중앙값은 893.5로 positive skewness를 보이고 있다.
+줄기 개수를 수정한다면 클러스터가 두개 있다고 볼 수 있다. 이때 나타나는
+800대가 아닌 다른 유량 집중 구간은 1100대이다. 유량이 600대가 드물고,
+500대는 완전히 없지만 400대에 한 번 관측된 것으로 보아 이를
+irregularity로 볼 수 있다,
+
+\subsubsection{２번 줄기그림과 히스토그램의 차이, 장단점 등을 간단히
+표로 작성하여라. 교과서 등 참조}\label{--------.---}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+& 줄기그림 & 히스토그램\tabularnewline
+\midrule
+\endhead
+공통점1 & 관측 빈도에 비례하는 길이의 막대 기둥이 그려진다
+&\tabularnewline
+공통점2 & 따라서 자료의 분포를 눈으로 확인할 수 있다 &\tabularnewline
+차이점1 & 자료들이 숫자로 나타나진다 & 상자가 쌓인 형태로
+표현된다\tabularnewline
+차이점2 & 중간값 계산이 가능하다 & 중간값 계산이 어렵다\tabularnewline
+차이점3 & 원자료와 무관하게 기존의 줄기그림을 활용할 수 있다 & 변형을
+위해서는 원자료를 사용해야한다.\tabularnewline
+차이점4 & 구간 폭이 1/2/5 * 10\^{}정수로 고정적으로 사용하여야 한다 &
+구간 폭을 임의로 지정하여 사용할 수 있다.\tabularnewline
+\bottomrule
+\end{longtable}
+
+\subsubsection{３ 인터넷 검색 또는 출판 자료에서 가장 최근의
+인구주택총조사 자료를 구하여 81쪽의 상자그림을 그리고, 81쪽의 상자
+그림과 비교하여 구별 인구의 변동 추이를
+설명하여라.}\label{----------81---81--------.}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <ea>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <b4>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <91>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <a3>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <bc>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <ea>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <b4>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <91>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <a3>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <bc>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <8c>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <ea>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <ac>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <8c>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <ea>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <ac>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <8c>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <a0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <84>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <8c>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <a0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <84>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <b6>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <82>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <b0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <b6>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <82>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <b0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <84>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <9c>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <9a>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <84>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <9c>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <9a>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <9a>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <82>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <b0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <9a>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <82>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <b0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <9d>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <b2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <9c>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <9d>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <b2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <9c>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2000 도시별-구인구"): conversion failure on '2000
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2000 도시별-구인구"): conversion failure on '2000
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <8f>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2000 도시별-구인구"): conversion failure on '2000
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <84>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2000 도시별-구인구"): conversion failure on '2000
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2000 도시별-구인구"): conversion failure on '2000
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <8b>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2000 도시별-구인구"): conversion failure on '2000
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <9c>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2000 도시별-구인구"): conversion failure on '2000
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2000 도시별-구인구"): conversion failure on '2000
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <b3>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2000 도시별-구인구"): conversion failure on '2000
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <84>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2000 도시별-구인구"): conversion failure on '2000
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <ea>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2000 도시별-구인구"): conversion failure on '2000
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2000 도시별-구인구"): conversion failure on '2000
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <ac>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2000 도시별-구인구"): conversion failure on '2000
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2000 도시별-구인구"): conversion failure on '2000
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <9d>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2000 도시별-구인구"): conversion failure on '2000
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2000 도시별-구인구"): conversion failure on '2000
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <ea>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2000 도시별-구인구"): conversion failure on '2000
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2000 도시별-구인구"): conversion failure on '2000
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <ac>
+\end{verbatim}
+
+\includegraphics{eda마크다운_files/figure-latex/unnamed-chunk-1-1.pdf}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <ea>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <b4>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <91>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <a3>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <bc>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <ea>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <b4>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <91>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <a3>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '愿묒＜' in 'mbcsToSbcs': dot substituted for
+## <bc>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <8c>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <ea>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <ac>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <8c>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <ea>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>援<U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <ac>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <8c>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <a0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <84>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <8c>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <a0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD><U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <84>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <b6>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <82>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <b0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <b6>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <82>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '遺<U+FFFD><U+FFFD>' in 'mbcsToSbcs': dot substituted for
+## <b0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <84>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <9c>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <9a>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <84>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <9c>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <9a>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>쒖슱' in 'mbcsToSbcs': dot substituted for
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <9a>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <82>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <b0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <9a>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <82>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄궛' in 'mbcsToSbcs': dot substituted for
+## <b0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <9d>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <b2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <9c>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <9d>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <b2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(side = 1, at = 1:7, labels = c("광주", "대구", "대전", "부
+## 산", : conversion failure on '<U+FFFD>몄쿇' in 'mbcsToSbcs': dot substituted for
+## <9c>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2017 도시별-구인구"): conversion failure on '2017
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2017 도시별-구인구"): conversion failure on '2017
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <8f>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2017 도시별-구인구"): conversion failure on '2017
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <84>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2017 도시별-구인구"): conversion failure on '2017
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2017 도시별-구인구"): conversion failure on '2017
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <8b>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2017 도시별-구인구"): conversion failure on '2017
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <9c>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2017 도시별-구인구"): conversion failure on '2017
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2017 도시별-구인구"): conversion failure on '2017
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <b3>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2017 도시별-구인구"): conversion failure on '2017
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <84>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2017 도시별-구인구"): conversion failure on '2017
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <ea>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2017 도시별-구인구"): conversion failure on '2017
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2017 도시별-구인구"): conversion failure on '2017
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <ac>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2017 도시별-구인구"): conversion failure on '2017
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2017 도시별-구인구"): conversion failure on '2017
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <9d>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2017 도시별-구인구"): conversion failure on '2017
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2017 도시별-구인구"): conversion failure on '2017
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <ea>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2017 도시별-구인구"): conversion failure on '2017
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main = "2017 도시별-구인구"): conversion failure on '2017
+## <U+FFFD>꾩떆蹂<U+FFFD>-援ъ씤援<U+FFFD>' in 'mbcsToSbcs': dot substituted for <ac>
+\end{verbatim}
+
+\includegraphics{eda마크다운_files/figure-latex/unnamed-chunk-1-2.pdf}
+
+구별 인구의 변동 추이를 살펴보면 다음과 같다. 이때, 중앙값의 위치 변화로
+positive skewness가 negative skewness로 변하였다면 이는 인구가 특정 구로
+몰렸음을 뜻하고, spread와 whisker의 증가 또한 인구 몰림을 설명한다.
+
+\begin{itemize}
+\item
+  광주의 경우 중앙값은 늘었고, spread가 커졌으며, whisker가 길어졌다.
+  아웃라이어는 사라졌으며, positive skew에서 negative skew로 변하였다.
+  이는 전체적으로 광주 인구의 증가를 뜻한다. 또, 인구가 과거에는 구별로
+  고루 퍼져있던 것에 비해 특정 지역으로 인구가 몰리는 현상임을 뜻한다.
+  다만, 2000년에는 한 구에 극단적으로 인구가 집중되어 있던 구가 있었던
+  것에 비해 지금은 상대적으로 여러 구에 인구가 집중되고 있음을 알 수
+  있다.
+\item
+  대구, 부산의 경우 2000년과 2017년 구별 인구수의 분포에 크게 변화가
+  없다. 다만 중앙값이 조금 내려간 것과 spread가 커진 것으로 보아 경미한
+  수준의 인구 몰림 현상이 나타났다.
+\item
+  대전의 경우 중앙값이 내려갔고, negative skew에서 positive skew로
+  변하였으며, spread가 커졌다. 또, whisker길이 또한 길어졌다. 이런
+  점들은 대전의 경우 특정 구의 인구 몰림이 심해졌음을 보여준다.
+\item
+  서울의 경우 중앙값은 경미하게 내려갔으며 negative skewness로
+  변화했다.또, spread와 whisker가 증가했다.
+\item
+  울산의 경우 타 구역과 다르게 spread가 줄었으며 whisker가 짧아졌고,
+  outlier 하나를 제외하면 상대적으로 symmetric해졌다. 이는 구별 인구수가
+  2000년에 비해 고루 분산됐음을 알 수 있다. 다만 outlier값 한 구의
+  인구는 여전히 높이 유지된다.
+\item
+  인천의 경우 상당히 유사하지만 중앙값이 조금 올랐고, spread가 증가했다.
+  이는 큰 변화는 없었으나 인구 몰림 현상이 나타났다고 이해할 수 있다.
+\end{itemize}
+
+종합해보면, 울산을 제외한 6개 시에서 인구 몰림 현상이 나타났음을
+상자그림 분석을 통해 알 수 있다.
+
+\subsubsection{４ (R datasets:: ToothGrowth) 이의 성장에 비타민 C의
+영향이 있는지 상자그림으로
+분석하여라.}\label{r-datasets-toothgrowth----c----.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(ToothGrowth)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       len        supp         dose      
+##  Min.   : 4.20   OJ:30   Min.   :0.500  
+##  1st Qu.:13.07   VC:30   1st Qu.:0.500  
+##  Median :19.25           Median :1.000  
+##  Mean   :18.81           Mean   :1.167  
+##  3rd Qu.:25.27           3rd Qu.:2.000  
+##  Max.   :33.90           Max.   :2.000
+\end{verbatim}
+
+우선, 다루게 될 ToothGrowth 데이터의 개수는 총 60개로, len은 기니피그의
+이빨 길이, supp은 비타민C 투여방법으로 OJ는 orange juice를 통한 비타민c
+투여방법, VC는 약물을 통한 비타민c 투여방법이다. Dose는 비타민 c
+투여량으로 총 0.5, 1, 2 씩 투여하는 실험군이 있다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{boxplot}\NormalTok{(len }\OperatorTok{~}\StringTok{ }\NormalTok{supp}\OperatorTok{*}\NormalTok{dose, }\DataTypeTok{data=}\NormalTok{ToothGrowth, }\DataTypeTok{col=}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\StringTok{"royalblue"}\NormalTok{)),}\DataTypeTok{ylab=}\StringTok{"길이"}\NormalTok{, }\DataTypeTok{xlab=}\StringTok{"투여방법과 투여량"}\NormalTok{, }\DataTypeTok{main=}\StringTok{"투여방법과 투여량에 따른 이빨 길이"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <ed>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <88>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <ac>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <97>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <ac>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <b0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <a9>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <b2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <95>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <ea>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <b3>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <bc>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <ed>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <88>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <ac>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <97>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <ac>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <9f>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <89>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <97>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <90>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <94>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <b0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <a5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <9d>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <b4>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <b9>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <a8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <ea>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <b8>
+
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <9d>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD>됱
+## 뿉 <U+FFFD>곕Ⅸ <U+FFFD>대묠 湲몄씠' in 'mbcsToSbcs': dot substituted for <b4>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <ed>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <88>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <ac>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <97>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <ac>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <b0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <a9>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <b2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <95>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <ea>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <b3>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <bc>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <ed>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <88>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <ac>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <97>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <ac>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <eb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <9f>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투여방
+## 법과 투여량에 따른 이빨 길이"): conversion failure on '<U+FFFD>ъ뿬諛⑸쾿怨<U+FFFD> <U+FFFD>ъ뿬<U+FFFD><U+FFFD>'
+## in 'mbcsToSbcs': dot substituted for <89>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투
+## 여방법과 투여량에 따른 이빨 길이"): conversion failure on '湲몄씠' in
+## 'mbcsToSbcs': dot substituted for <ea>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투
+## 여방법과 투여량에 따른 이빨 길이"): conversion failure on '湲몄씠' in
+## 'mbcsToSbcs': dot substituted for <b8>
+
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투
+## 여방법과 투여량에 따른 이빨 길이"): conversion failure on '湲몄씠' in
+## 'mbcsToSbcs': dot substituted for <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투
+## 여방법과 투여량에 따른 이빨 길이"): conversion failure on '湲몄씠' in
+## 'mbcsToSbcs': dot substituted for <ec>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투
+## 여방법과 투여량에 따른 이빨 길이"): conversion failure on '湲몄씠' in
+## 'mbcsToSbcs': dot substituted for <9d>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(ylab = "길이", xlab = "투여방법과 투여량", main = "투
+## 여방법과 투여량에 따른 이빨 길이"): conversion failure on '湲몄씠' in
+## 'mbcsToSbcs': dot substituted for <b4>
+\end{verbatim}
+
+\includegraphics{eda마크다운_files/figure-latex/ToothGrwoth-1.pdf}
+투여방법과 투여량 둘 모두를 고려하여 상자그림을 그려 분석하는 것이
+가능하다. 이 그림에서 보면 비타민 투여양이 0.5와 1일때, 약물을 통해
+비타민 C를 섭취한 기니피그(VC)의 이빨길이 분포가 좀 더 precise 하지만,
+오렌지 주스를 통해 비타민 C를 섭취한 기니피그(OJ)의 이빨길이보다 짧게
+나타난다. 그러나, 비타민 투여양이 2일때는 OJ와 VC 중앙값이 거의 일치하게
+나타나는 반면, OJ가 더 precise하게 나타난다. 이는 비타민C 투여량이 2가
+되기 전까지는 오렌지주스에 있는 다른 요인이 이빨길이 성장에 영향을
+주지만, 투여량이 2가 되면 이빨길이에 영향을 주는 타 요인이 있다 하더라도
+큰 영향을 못 끼친다고 해석할 수 있다.
+
+\subsubsection{５ R에서 summary()와 fivenum()의 차이를 알아
+보아라.}\label{r-summary-fivenum---.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{fivenum}\NormalTok{(Nile)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  456.0  798.0  893.5 1035.0 1370.0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(Nile)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   456.0   798.5   893.5   919.4  1032.5  1370.0
+\end{verbatim}
+
+R에서 fivenum(x, na.rm=T) 명령어는 결측치를 포함하는 숫자형 자료에 대해
+투키의 다섯수치요약인 최소값, lower Hinge, 중앙값, upper Hinge, 최대값을
+구해준다. 이때 결측치는 default 조건인 na.rm=T로 인해 제거된다. 결과값은
+특별한 설명 없이 숫자 벡터로 반환된다. R에서 summary() 명령어는
+다섯수치요약에 있는 최소, 최대, 중앙값을 반환해주는 동시에
+다섯수치요약과는 달리 평균과 1사분위값, 3사주분위값을 반환해준다.
+추가적으로 summary 함수는 숫자형이 아닌 문자열의 경우 개수를 세어
+명시해준다. summary() 함수는 fivenum()과 같이 결측치를 제하고 결과값을
+알려주며, 결측치의 개수를 따로 명시해주고 있다.
+
+
+\end{document}

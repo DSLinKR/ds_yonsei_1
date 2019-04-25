@@ -1,0 +1,85 @@
+---
+title: "Crawling_dsl"
+output: html_document
+---
+
+```{r setup, include=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Daum
+
+library(tidyverse)
+library(httr)
+library(rvest)
+
+'https://www.daum.net/'
+
+res <- GET(url = 'https://www.daum.net/')
+
+print(x = res)
+
+searchWords <- res %>% 
+  read_html() %>% 
+  html_nodes(css = 'div.realtime_part > ol > li > div > div:nth-child(1) > span.txt_issue > a') %>% 
+  html_text(trim = TRUE)
+
+print(x = searchWords)
+
+```{r, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(httr)
+library(rvest)
+
+'https://www.daum.net/'
+
+res <- GET(url = 'https://www.daum.net/')
+
+print(x = res)
+
+searchWords <- res %>% 
+  read_html() %>% 
+  html_nodes(css = 'div.realtime_part > ol > li > div > div:nth-child(1) > span.txt_issue > a') %>% 
+  html_text(trim = TRUE)
+
+print(x = searchWords)
+```
+
+## Naver_Stock
+
+library(tidyverse)
+library(httr)
+library(rvest)
+
+'https://finance.naver.com/sise/sise_index.nhn?code=KOSPI'
+
+res <- GET(url = 'https://finance.naver.com/sise/sise_index.nhn?code=KOSPI')
+
+print(x = res)
+
+searchtable <- res %>% 
+  read_html(encoding='euc-kr') %>% 
+  html_nodes(css = '#contentarea_left > div.box_top_sub > div > div.subtop_sise_detail > table') %>% 
+  html_table(trim = TRUE)
+
+print(x = searchtable)
+
+```{r, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(httr)
+library(rvest)
+
+'https://finance.naver.com/sise/sise_index.nhn?code=KOSPI'
+
+res <- GET(url = 'https://finance.naver.com/sise/sise_index.nhn?code=KOSPI')
+
+print(x = res)
+
+searchtable <- res %>% 
+  read_html(encoding='euc-kr') %>% 
+  html_nodes(css = '#contentarea_left > div.box_top_sub > div > div.subtop_sise_detail > table') %>% 
+  html_table(trim = TRUE)
+
+print(x = searchtable)
+```
+
