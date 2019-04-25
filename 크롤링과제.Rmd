@@ -50,6 +50,7 @@ print(x = searchWords)
 library(tidyverse)
 library(httr)
 library(rvest)
+library(stringr)
 
 'https://finance.naver.com/sise/sise_index.nhn?code=KOSPI'
 
@@ -60,7 +61,27 @@ print(x = res)
 searchtable <- res %>% 
   read_html(encoding='euc-kr') %>% 
   html_nodes(css = '#contentarea_left > div.box_top_sub > div > div.subtop_sise_detail > table') %>% 
-  html_table(trim = TRUE)
+  html_table(fill = TRUE)
+
+searchtable <- as.data.frame(searchtable)
+searchtable$X1<-searchtable$X1 %>% str_remove_all(pattern = '\n|\t')
+searchtable$X2<-searchtable$X2 %>% str_remove_all(pattern = '\n|\t')
+searchtable$X3<-searchtable$X3 %>% str_remove_all(pattern = '\n|\t')
+searchtable$X4<-searchtable$X4 %>% str_remove_all(pattern = '\n|\t')
+
+상한<-str_sub(lastlist,-135,-130)
+하한<-str_sub(lastlist,-6,-1)
+상승<-str_sub(lastlist,-104,-97)
+보합<-str_sub(lastlist,-71,-65)
+하락<-str_sub(lastlist,-39,-32)
+
+a<- c(상한, 상승)
+b<- 보합
+c<-c(하락, 하한)
+searchtable$X2[4] = list(a)
+searchtable$X3[4] = b
+searchtable$X4[4] = list(c)
+
 
 print(x = searchtable)
 
@@ -68,6 +89,7 @@ print(x = searchtable)
 library(tidyverse)
 library(httr)
 library(rvest)
+library(stringr)
 
 'https://finance.naver.com/sise/sise_index.nhn?code=KOSPI'
 
@@ -78,7 +100,30 @@ print(x = res)
 searchtable <- res %>% 
   read_html(encoding='euc-kr') %>% 
   html_nodes(css = '#contentarea_left > div.box_top_sub > div > div.subtop_sise_detail > table') %>% 
-  html_table(trim = TRUE)
+  html_table(fill = TRUE)
+
+searchtable <- as.data.frame(searchtable)
+searchtable$X1<-searchtable$X1 %>% str_remove_all(pattern = '\n|\t')
+searchtable$X2<-searchtable$X2 %>% str_remove_all(pattern = '\n|\t')
+searchtable$X3<-searchtable$X3 %>% str_remove_all(pattern = '\n|\t')
+searchtable$X4<-searchtable$X4 %>% str_remove_all(pattern = '\n|\t')
+
+lastlist<-searchtable[[2]][4]
+as.character(lastlist)
+
+상한<-str_sub(lastlist,-135,-130)
+하한<-str_sub(lastlist,-6,-1)
+상승<-str_sub(lastlist,-104,-97)
+보합<-str_sub(lastlist,-71,-65)
+하락<-str_sub(lastlist,-39,-32)
+
+a<- c(상한, 상승)
+b<- 보합
+c<-c(하락, 하한)
+searchtable$X2[4] = list(a)
+searchtable$X3[4] = b
+searchtable$X4[4] = list(c)
+
 
 print(x = searchtable)
 ```

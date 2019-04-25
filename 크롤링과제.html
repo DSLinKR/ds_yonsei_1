@@ -209,10 +209,10 @@ $(document).ready(function () {
 <pre><code>## Warning: package 'xml2' was built under R version 3.5.3</code></pre>
 <pre><code>## [1] &quot;https://www.daum.net/&quot;</code></pre>
 <pre><code>## Response [https://www.daum.net/]
-##   Date: 2019-04-25 08:04
+##   Date: 2019-04-25 12:38
 ##   Status: 200
 ##   Content-Type: text/html;charset=UTF-8
-##   Size: 225 kB
+##   Size: 226 kB
 ## &lt;!DOCTYPE html&gt;
 ## &lt;html lang=&quot;ko&quot; class=&quot;&quot;&gt;
 ## &lt;head&gt;
@@ -224,25 +224,28 @@ $(document).ready(function () {
 ## &lt;meta property=&quot;og:image&quot; content=&quot;//i1.daumcdn.net/svc/image/U03/common...
 ## &lt;meta property=&quot;og:description&quot; content=&quot;나의 관심 콘텐츠를 가장 즐겁게 볼 수 있는 Daum&quot;&gt;
 ## ...</code></pre>
-<pre><code>##  [1] &quot;이재명&quot;          &quot;양호석&quot;          &quot;차오름&quot;         
-##  [4] &quot;채이배&quot;          &quot;근로장려금&quot;      &quot;정지원 아나운서&quot;
-##  [7] &quot;고민정&quot;          &quot;조두순&quot;          &quot;박근혜&quot;         
-## [10] &quot;머슬마니아&quot;</code></pre>
+<pre><code>##  [1] &quot;채이배&quot;               &quot;이재명&quot;               &quot;권은희&quot;              
+##  [4] &quot;고민정&quot;               &quot;공룡알 화석&quot;          &quot;차오름&quot;              
+##  [7] &quot;양호석&quot;               &quot;공수처법&quot;             &quot;김준현&quot;              
+## [10] &quot;이상한 나라의 며느리&quot;</code></pre>
 </div>
 <div id="naver_stock" class="section level2">
 <h2>Naver_Stock</h2>
-<p>library(tidyverse) library(httr) library(rvest)</p>
+<p>library(tidyverse) library(httr) library(rvest) library(stringr)</p>
 <p>‘<a href="https://finance.naver.com/sise/sise_index.nhn?code=KOSPI" class="uri">https://finance.naver.com/sise/sise_index.nhn?code=KOSPI</a>’</p>
 <p>res &lt;- GET(url = ‘<a href="https://finance.naver.com/sise/sise_index.nhn?code=KOSPI" class="uri">https://finance.naver.com/sise/sise_index.nhn?code=KOSPI</a>’)</p>
 <p>print(x = res)</p>
-<p>searchtable &lt;- res %&gt;% read_html(encoding=‘euc-kr’) %&gt;% html_nodes(css = ‘#contentarea_left &gt; div.box_top_sub &gt; div &gt; div.subtop_sise_detail &gt; table’) %&gt;% html_table(trim = TRUE)</p>
+<p>searchtable &lt;- res %&gt;% read_html(encoding=‘euc-kr’) %&gt;% html_nodes(css = ‘#contentarea_left &gt; div.box_top_sub &gt; div &gt; div.subtop_sise_detail &gt; table’) %&gt;% html_table(fill = TRUE)</p>
+<p>searchtable &lt;- as.data.frame(searchtable) searchtable<span class="math inline">\(X1&lt;-searchtable\)</span>X1 %&gt;% str_remove_all(pattern = ‘|’) searchtable<span class="math inline">\(X2&lt;-searchtable\)</span>X2 %&gt;% str_remove_all(pattern = ‘|’) searchtable<span class="math inline">\(X3&lt;-searchtable\)</span>X3 %&gt;% str_remove_all(pattern = ‘|’) searchtable<span class="math inline">\(X4&lt;-searchtable\)</span>X4 %&gt;% str_remove_all(pattern = ‘|’)</p>
+<p>상한&lt;-str_sub(lastlist,-135,-130) 하한&lt;-str_sub(lastlist,-6,-1) 상승&lt;-str_sub(lastlist,-104,-97) 보합&lt;-str_sub(lastlist,-71,-65) 하락&lt;-str_sub(lastlist,-39,-32)</p>
+<p>a&lt;- c(상한, 상승) b&lt;- 보합 c&lt;-c(하락, 하한) searchtable<span class="math inline">\(X2[4] = list(a) searchtable\)</span>X3[4] = b searchtable$X4[4] = list(c)</p>
 <p>print(x = searchtable)</p>
 <pre><code>## [1] &quot;https://finance.naver.com/sise/sise_index.nhn?code=KOSPI&quot;</code></pre>
 <pre><code>## Response [https://finance.naver.com/sise/sise_index.nhn?code=KOSPI]
-##   Date: 2019-04-25 08:04
+##   Date: 2019-04-25 12:38
 ##   Status: 200
 ##   Content-Type: text/html;charset=EUC-KR
-##   Size: 50.2 kB
+##   Size: 50.1 kB
 ## 
 ## 
 ## 
@@ -254,27 +257,17 @@ $(document).ready(function () {
 ## &lt;script type=&quot;text/javascript&quot;&gt;
 ## function mainSiseMove(code) {
 ## ...</code></pre>
-<pre><code>## [[1]]
-##             X1
-## 1 거래량(천주)
-## 2     장중최고
-## 3     52주최고
-## 4    등락/종목
-##                                                                                                                                                                                 X2
-## 1                                                                                                                                                                          427,285
-## 2                                                                                                                                                                         2,200.89
-## 3                                                                                                                                                                         2,516.57
-## 4 상한종목수1 \n\t                        상승종목수247 \n\t                        보합종목수69 \n\t                        하락종목수579 \n\t                        하한종목수0
-##                                                                                                                                                                                 X3
-## 1                                                                                                                                                                   거래대금(백만)
-## 2                                                                                                                                                                         장중최저
-## 3                                                                                                                                                                         52주최저
-## 4 상한종목수1 \n\t                        상승종목수247 \n\t                        보합종목수69 \n\t                        하락종목수579 \n\t                        하한종목수0
-##                                                                                                                                                                                 X4
-## 1                                                                                                                                                                        5,413,864
-## 2                                                                                                                                                                         2,187.44
-## 3                                                                                                                                                                         1,984.53
-## 4 상한종목수1 \n\t                        상승종목수247 \n\t                        보합종목수69 \n\t                        하락종목수579 \n\t                        하한종목수0</code></pre>
+<pre><code>## [1] &quot;상한종목수1                         상승종목수247                         보합종목수69                         하락종목수579                         하한종목수0&quot;</code></pre>
+<pre><code>##             X1                         X2             X3
+## 1 거래량(천주)                    441,137 거래대금(백만)
+## 2     장중최고                   2,200.89       장중최저
+## 3     52주최고                   2,516.57       52주최저
+## 4    등락/종목 상한종목수1, 상승종목수247   보합종목수69
+##                           X4
+## 1                  5,610,697
+## 2                   2,187.44
+## 3                   1,984.53
+## 4 하락종목수579, 하한종목수0</code></pre>
 </div>
 
 
